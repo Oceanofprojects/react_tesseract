@@ -1,11 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 
-function myfun(){
-  alert(9050)
-}
+
 
 function App() {
+
+  function Myfun(){
+  alert(9050)
+}
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -14,7 +17,7 @@ function App() {
          Hi, Team :
         </p>
         <a
-  onclick ={myfun}
+  onclick ={Myfun}
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
