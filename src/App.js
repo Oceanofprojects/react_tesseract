@@ -6,6 +6,10 @@ import './App.css';
 function App() {
 
   function myfun(){
+    $.ajax({url: "https://dummyjson.com/products/1",'type':'get', success: function(result){
+    document.write(result);
+  }});
+    
   alert(9050)
 }
   
