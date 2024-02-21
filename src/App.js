@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
 
-  function Myfun(){
+  function myfun(){
   alert(9050)
 }
   
@@ -17,7 +17,7 @@ function App() {
          Hi, Team :
         </p>
         <a
-  onclick ={Myfun}
+  onClick ={myfun}
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
