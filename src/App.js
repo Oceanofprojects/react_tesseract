@@ -10,6 +10,7 @@ function App() {
          Hi, Team :
         </p>
         <a
+  onclick ="alert()" 
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
