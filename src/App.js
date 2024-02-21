@@ -4,16 +4,7 @@ import './App.css';
 
 
 function App() {
-
-  function myfun(){
-    $.ajax({url: "https://dummyjson.com/products/1",'type':'get', success: function(result){
-    document.write(result);
-  }});
-    
-  alert(9050)
-}
-  
-  return (
+return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -23,8 +14,8 @@ function App() {
         <a
   onClick ={myfun}
           className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
+          href="#"
+          target="_self"
           rel="noopener noreferrer"
         >
           ~ We ready to launch tesseract
@@ -32,6 +23,12 @@ function App() {
       </header>
     </div>
   );
+}
+
+async function myfun(){
+    const response = await fetch('https://jsonplaceholder.typicode.com/users');
+    const users = await response.json();
+    console.log(users) 
 }
 
 export default App;
