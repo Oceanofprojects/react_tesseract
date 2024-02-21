@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          ~ We ready to launch tesseract ~
         </a>
       </header>
     </div>
