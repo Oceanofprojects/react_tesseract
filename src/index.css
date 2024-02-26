@@ -25,10 +25,9 @@
 
     .c-profile{
         height:200px;
-        width:200px;   
+        width:200px;
             min-height:200px;
             min-width:200px;
-/*            background-position: center;*/
             position: relative;
             top:0px;
             left:0px;
@@ -98,7 +97,7 @@
     display: block;
 }
 
-    .txt-box{
+    .gg-txt-box{
         width:200px;
         min-width:100px;
         padding:15px 10px;
@@ -106,17 +105,31 @@
         border-radius:5px;
         outline:none;
         margin:10px 0px;
-        background:transparent;
+        background:url('game-assets/gg-design/gg-gold-icons/gg-scroll.png');
+        background-size:100% 100%;
+        background-position: center;
+        padding-left:20px;
         color:darkred;
         text-shadow:.5px .5px 0px #ddda,-.5px -.5px 0px #555a;
         letter-spacing:2px;
         font-weight:bolder;
         border:none;
     }
+    .gg-active-btn{
+      cursor: pointer;
+      border:none;outline:none;font-size:13pt;
+      background:url('game-assets/gg-design/gg-gold-icons/gg-btn.png');
+      background-size:100% 100%;background-position: center;
+      padding:15px 20px;
+      font-weight:bolder;
+    }
+    .gg-active-btn:hover{
+      color:darkred;
+    }
     @font-face{
         font-family: g-title-f;
         src:url('./game-assets/fonts/Kingthings_Gothique.ttf');
-    
+
     }
     .g-title {
         color: #fff;

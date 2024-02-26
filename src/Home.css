@@ -1,0 +1,17 @@
+body{
+    background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.6)),url('game-assets/gg-design/bg1.jpg');
+    background-size: cover;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:#fff;
+}
+.g-title{
+font-family: g-title-f;
+}
+
+.rightFloatBtns{
+    position:absolute;
+    top:10px;
+    right:10px;
+}
