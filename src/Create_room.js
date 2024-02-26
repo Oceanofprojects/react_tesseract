@@ -21,7 +21,7 @@ export default function Create_room() {
       </form>
       <div className='rightFloatBtns'>
         <button className="active-btn fa fa-chevron-left" onClick={()=>navigate(-1)}></button>
-                <button className="active-btn" onClick={()=>window.open('/JoinRoom','_self')}>Create room</button>
+                <button className="active-btn" onClick={()=>window.open('/JoinRoom','_self')}>Join room</button>
     </div>
       </div>
     );
