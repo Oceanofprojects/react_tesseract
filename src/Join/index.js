@@ -1,6 +1,6 @@
-import DryLeafLayer from './DryLeafLayer';
+import DryLeafLayer from '../DryLeafLayer';
 import {useNavigate} from 'react-router-dom';
-// import './Join_room.css';
+import Back_Lay from '../Layout';
 
 
 export default function Join_room() {
@@ -10,6 +10,7 @@ export default function Join_room() {
       <h1 class="g-title">Join <span style={{color:'darkred'}}>R</span>oom</h1>
       <br/>
       <DryLeafLayer/>
+    <Back_Lay attr={{url:'../game-assets/gg-design/bg3.jpg'}} />
       <form>
           <center>
           <input type="text" maxlength="10" className="gg-txt-box" placeholder="Your name" />
