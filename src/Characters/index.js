@@ -28,7 +28,7 @@ export default function Characters(){
             <div className="corner-frame"></div>
         </div>
 
-        <div className="c-profile char_2" style={{background:`url(/game-assets/gg-design/characters/thief.jpg)`,backgroundPosition:'center',backgroundSize:'cover'}}>
+        <div className="c-profile char_2" style={{background:`url(//game-assets/gg-design/characters/thief.jpg)`,backgroundPosition:'center',backgroundSize:'cover'}}>
                 <span>
                     Thief
                 </span>
