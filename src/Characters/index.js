@@ -14,14 +14,14 @@ export default function Characters(){
 <h1 class="g-title">Cha<span style={{color:'darkred'}}>r</span>acters</h1>
 <br/>
     <section className="c-profile-layer">
-        <div className="c-profile char_1" style={{background:`url(../game-assets/gg-design/characters/minister.jpg)`,backgroundPosition:'center',backgroundSize:'cover'}}>
+        <div className="c-profile char_1" style={{backgroundImage:`url("../game-assets/gg-design/characters/minister.jpg")`,backgroundPosition:'center',backgroundSize:'cover'}}>
                 <span>
                     Minister
                 </span>
             <div className="corner-frame"></div>
         </div>
 
-        <div className="c-profile char_2" style={{background:`url("game-assets/gg-design/characters/king.jpg")`,backgroundPosition:'center',backgroundSize:'cover'}}>
+        <div className="c-profile char_2" style={{backgroundImage:`url("game-assets/gg-design/characters/king.jpg")`,backgroundPosition:'center',backgroundSize:'cover'}}>
                 <span>
                     King
                 </span>
