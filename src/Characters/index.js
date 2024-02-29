@@ -14,7 +14,7 @@ export default function Characters(){
 <h1 class="g-title">Cha<span style={{color:'darkred'}}>r</span>acters</h1>
 <br/>
     <section className="c-profile-layer">
-        <div className="c-profile char_1" style={{backgroundImage:"url('../game-assets/gg-design/characters/minister.jpg')",backgroundPosition:'center',backgroundSize:'cover'}}>
+        <div className="c-profile char_1" style={{backgroundImage:"url(require('../game-assets/gg-design/characters/minister.jpg'))",backgroundPosition:'center',backgroundSize:'cover'}}>
                 <span>
                     Minister
                 </span>
