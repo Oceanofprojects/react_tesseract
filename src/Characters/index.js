@@ -18,7 +18,7 @@ export default function Characters(){
     <br/>
 <DryLeafLayer/>
 <h1 class="g-title">Cha<span style={{color:'darkred'}}>r</span>acters</h1>
-<br/>
+<br/><center>
     <section className="c-profile-layer">
         <div className="c-profile char_1" style={{backgroundImage:`url(${minister})`,backgroundPosition:'center',backgroundSize:'cover'}}>
                 <span>
@@ -60,6 +60,7 @@ export default function Characters(){
             <div className="corner-frame"></div>
         </div>
       </section>
+  </center>
     </>
   );
 
