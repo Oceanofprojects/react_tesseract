@@ -1,5 +1,5 @@
 export default function Back_Lay({attr}){
-    let data = "'"+attr.url+"'";
+    let data = attr.url;
     return(
        <section style={{position:'fixed',
 top:'0',left:'0',
