@@ -19,14 +19,25 @@
 
 
 
-    .c-profile-layer {
+    .c-profile-layer_bp {
         display: flex;
         justify-content: space-around;
         align-items: center;
         flex-wrap: wrap;
     }
+.c-profile-layer{
+        max-width:1200px;
+            width:100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap:10px;
+}
+.c-profile{
+        min-height:250px;
+            margin:10px;
+}
 
-    .c-profile{
+    .c-profile_bp{
         height:200px;
         width:200px;
             min-height:200px;
