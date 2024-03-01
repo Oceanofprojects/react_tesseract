@@ -34,28 +34,28 @@ export default function Characters(){
             <div className="corner-frame"></div>
         </div>
 
-        <div className="c-profile char_2" style={{backgroundImage:``url(${queen})``,backgroundPosition:'center',backgroundSize:'cover'}}>
+        <div className="c-profile char_2" style={{backgroundImage:`url(${queen})`,backgroundPosition:'center',backgroundSize:'cover'}}>
                 <span>
-                    Thief
+                    Queen
                 </span>
             <div className="corner-frame"></div>
         </div>
 
         <div className="c-profile char_2" style={{backgroundImage:`url(${thief})`,backgroundPosition:'center',backgroundSize:'cover'}}>
                 <span>
-                    Queen
+                    Thief
                 </span>
             <div className="corner-frame"></div>
         </div>
         <div className="c-profile char_2" style={{backgroundImage:`url(${wizard})`,backgroundPosition:'center',backgroundSize:'cover'}}>
                 <span>
-                    Police
+                    Wizard
                 </span>
             <div className="corner-frame"></div>
         </div>
         <div className="c-profile char_2" style={{backgroundImage:`url(${police})`,backgroundPosition:'center',backgroundSize:'cover'}}>
                 <span>
-                    Wizard
+                    Police
                 </span>
             <div className="corner-frame"></div>
         </div>
