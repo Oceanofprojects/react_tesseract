@@ -12,18 +12,10 @@
     body {
         height:100vh;
         width:100%;
-                        background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('game-assets/gg-design/bg1.jpg');
+        background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('game-assets/gg-design/bg1.jpg');
             background-position:center;
             background-size: cover;
-    }
-
-
-
-    .c-profile-layer_bp {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-wrap: wrap;
+            background-attachment: fixed;
     }
 .c-profile-layer{
         max-width:1200px;
@@ -40,34 +32,18 @@
             left:0px;
             box-shadow:0px 0px 5px 5px rgba(0,0,0,.3),0px 10px 10px 10px rgba(0,0,0,.1);
             cursor: pointer;
-            transition:.5s;
             border-radius:10px 10px 0px 10px;
+            background-size:cover;
+            transition:.5s;
 }
-
-    .c-profile_bp{
-        height:200px;
-        width:200px;
-            min-height:200px;
-            min-width:200px;
-            position: relative;
-            top:0px;
-            left:0px;
-            margin:15px 5px;
-            box-shadow:0px 0px 5px 5px rgba(0,0,0,.3),0px 10px 10px 10px rgba(0,0,0,.1);
-            overflow: hidden;
-            cursor: pointer;
-            transition:.5s;
-            border-radius:10px 10px 0px 10px;
-        }
-
-
 
         .c-profile-layer .corner-frame{
             position: absolute;
             bottom:0px;
             right:0px;
             height:150px;
-            width:150px;       background:url('https://img1.picmix.com/output/stamp/normal/9/1/6/9/2209619_ad216.gif');
+            width:150px;
+            background:url('https://img1.picmix.com/output/stamp/normal/9/1/6/9/2209619_ad216.gif');
             background-position:top left;
             background-size: cover;
             transform: rotate(90deg);
@@ -108,7 +84,7 @@
         color:#000a;
     }
     .c-profile:hover{
-        background-size: 120%;
+        background-size:120%;
     }
 .c-profile:hover > span{
     opacity:1;
@@ -133,13 +109,21 @@
         font-weight:bolder;
         border:none;
     }
-    .gg-active-btn{
-      cursor: pointer;
+    .gg-btn{
       border:none;outline:none;font-size:13pt;
       background:url('game-assets/gg-design/gg-gold-icons/gg-btn.png');
       background-size:100% 100%;background-position: center;
       padding:15px 20px;
       font-weight:bolder;
+      margin:15px 0px;
+    }
+    .gg-active-btn{
+      cursor: pointer;
+    }
+    .gg-in-active-btn{
+      cursor:not-allowed;
+      filter: grayscale(50%);
+      color:rgba(0,0,0,.5);
     }
     .gg-active-btn:hover{
       color:darkred;
@@ -154,20 +138,50 @@
         text-align: center;
         text-shadow: 0px 0px 5px #000, 0px 0px 15px #000;
         font-size: 6em;
+        padding:30px 0px;
     }
     @media only screen and (max-width:650px){
     .g-title{
         font-size: 5em;
     }
+    .c-profile-layer{
+                grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    }
+    .c-profile{
+            min-height:200px;
+          }
+          .c-profile-layer .corner-frame{
+            width:100px;height:100px;
+          }
+
 }
 @media only screen and (max-width:450px){
     .g-title{
         font-size: 3em;
     }
+    .c-profile-layer{
+                grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    }
+    .c-profile{
+            min-height:150px;
+          }
+          .c-profile-layer .corner-frame{
+            width:60px;height:60px;
+          }
+
 }
 
 @media only screen and (max-width:300px){
     .g-title{
         font-size: 2em;
     }
+    .c-profile-layer{
+                grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
+    }
+    .c-profile{
+            min-height:100px;
+          }
+          .c-profile-layer .corner-frame{
+            width:30px;height:30px;
+          }
 }

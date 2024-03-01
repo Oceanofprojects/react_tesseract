@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Back_Lay from '../Layout';
 import './Characters_Layer.css';
 import DryLeafLayer from '../DryLeafLayer.js';
 import minister from '../game-assets/gg-design/characters/minister.jpg';
@@ -13,47 +11,46 @@ import police from '../game-assets/gg-design/characters/police.jpg';
 export default function Characters(){
   return (
     <>
-    <Back_Lay attr={{url:'../game-assets/gg-design/bg4.png'}} />
     <br/>
     <br/>
 <DryLeafLayer/>
 <h1 class="g-title">Cha<span style={{color:'darkred'}}>r</span>acters</h1>
 <br/><center>
     <section className="c-profile-layer">
-        <div className="c-profile char_1" style={{backgroundImage:`url(${minister})`,backgroundPosition:'center',backgroundSize:'cover'}}>
+        <div className="c-profile char_1" style={{backgroundImage:`url(${minister})`,backgroundPosition:'center'}}>
                 <span>
                     Minister
                 </span>
             <div className="corner-frame"></div>
         </div>
 
-        <div className="c-profile char_2" style={{backgroundImage:`url(${king})`,backgroundPosition:'center',backgroundSize:'cover'}}>
+        <div className="c-profile char_2" style={{backgroundImage:`url(${king})`,backgroundPosition:'center'}}>
                 <span>
                     King
                 </span>
             <div className="corner-frame"></div>
         </div>
 
-        <div className="c-profile char_2" style={{backgroundImage:`url(${queen})`,backgroundPosition:'center',backgroundSize:'cover'}}>
+        <div className="c-profile char_2" style={{backgroundImage:`url(${queen})`,backgroundPosition:'center'}}>
                 <span>
                     Queen
                 </span>
             <div className="corner-frame"></div>
         </div>
 
-        <div className="c-profile char_2" style={{backgroundImage:`url(${thief})`,backgroundPosition:'center',backgroundSize:'cover'}}>
+        <div className="c-profile char_2" style={{backgroundImage:`url(${thief})`,backgroundPosition:'center'}}>
                 <span>
                     Thief
                 </span>
             <div className="corner-frame"></div>
         </div>
-        <div className="c-profile char_2" style={{backgroundImage:`url(${wizard})`,backgroundPosition:'center',backgroundSize:'cover'}}>
+        <div className="c-profile char_2" style={{backgroundImage:`url(${wizard})`,backgroundPosition:'center'}}>
                 <span>
                     Wizard
                 </span>
             <div className="corner-frame"></div>
         </div>
-        <div className="c-profile char_2" style={{backgroundImage:`url(${police})`,backgroundPosition:'center',backgroundSize:'cover'}}>
+        <div className="c-profile char_2" style={{backgroundImage:`url(${police})`,backgroundPosition:'center'}}>
                 <span>
                     Police
                 </span>
