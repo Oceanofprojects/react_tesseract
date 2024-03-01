@@ -71,7 +71,7 @@
             width:50%;
             padding:10px;
             background:url('https://img1.picmix.com/output/stamp/normal/9/1/6/9/2209619_ad216.gif');
-            background-position:bottom right;
+            background-position:top left;
             background-size: cover;
             transform: rotate(90deg);
         }
