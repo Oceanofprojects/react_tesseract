@@ -2,7 +2,7 @@ import $ from 'jquery';
 import Back_Lay from '../Layout';
 import './Characters_Layer.css';
 import DryLeafLayer from '../DryLeafLayer.js';
-import minister from 'game-assets/gg-design/characters/minister.jpg';
+import minister from '../game-assets/gg-design/characters/minister.jpg';
 
 
 export default function Characters(){
