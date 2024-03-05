@@ -10,6 +10,35 @@ import police from '../game-assets/gg-design/characters/police.jpg';
 
 
 export default function Whoiam(){
+
+
+  function PlayersFetched_(){
+    $('#player_fetch_cal').text("Waiting for 1 player !")
+    let data = "module=add_player&action=room_status&roomid=1233";
+    const response = fetch("http://127.0.0.1/raja_rani/api/index.php", {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/x-www-form-urlencoded",
+      }),
+      body: data
+    })
+      .then(async (res) => {
+        data = await res.json();
+        if(data.flag){
+          console.log(data)
+              // window.open('/whoiam?roomid='+btoa(btoa(data.roomid)),'_self');
+        }else{
+          console.log(data)
+          // _msg.innerText=data.message;
+          // _msg.style.color="tomato";
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      alert()
+  }
+
   let speed=100;//DEFAULT LOOP SPEED
   let loop=0;
   let flag=false;
@@ -17,14 +46,17 @@ export default function Whoiam(){
   let timeOfloop = 4;
   let tmp=null;
   let _mychar;
+  let roomid =11;
 
   return (
     <>
-    <br/>
-    <br/>
 <DryLeafLayer/>
 <h1 className="g-title">Make<span style={{color:'darkred'}}>up</span> Room</h1>
-<br/><center>
+<center>
+<br/>
+<span id="player_fetch_cal" style={{color:"#fff"}}></span>
+<br /><br/>
+
     <section className="c-profile-layer">
         <div className="c-profile char_1" style={{backgroundImage:`url(${minister})`,backgroundPosition:'center'}}>
                 <span>
@@ -67,9 +99,18 @@ export default function Whoiam(){
         </div>
       </section>
               <button className="gg-btn gg-active-btn" id="btn" style={{margin:'40px 0px',padding:'20px'}} onClick={Get_Character}>Who i'm ?</button>
+              <div className='rightFloatBtns'>
+                <button className="active-btn fa fa-share-alt"></button>
+                <button id="rid_bd" className="active-btn" onClick={PlayersFetched_}>Share ID</button>
+            </div>
+            <div className='FloatLabel leftFloatLabel'>
+            <label><Room /></label>
+          </div>
   </center>
+  <br/><br/><br/><br/>
     </>
   );
+
 
 
   function Choose_Character(id = 0){
@@ -128,5 +169,26 @@ export default function Whoiam(){
   	 * */
      Choose_Character((Math.floor(Math.random()*5)+1));//DEFAULT RAND ID (FOR TESTING)...
   }
+
+}
+
+function Room(){
+  var searchQuery = new URLSearchParams(window.location.search);
+  let params = new Map();
+  searchQuery.forEach((value,key)=>{
+    params.set(key,value);
+  });
+  // return params;
+  let room_data = params;//Room();
+  if(room_data.has('roomid')){
+    // document.getElementById('rid_bd').style.display='block';
+    return  'ID : '+atob(atob(room_data.get('roomid')));
+  }else{
+    // document.getElementById('rid_bd').style.display="none";
+    return "INVALID ID !";
+  }
+
+
+
 
 }

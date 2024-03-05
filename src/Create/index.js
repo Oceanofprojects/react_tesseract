@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import DryLeafLayer from '../DryLeafLayer';
 import {useNavigate} from 'react-router-dom';
 import './Create_room.css';
@@ -12,11 +13,11 @@ export default function Create_Room() {
       <DryLeafLayer/>
       <form>
       <center>
-        <input type="text" maxlength="10" className="gg-txt-box" placeholder="Your name"/>
+        <input type="text" maxlength="10" id="player_name" className="gg-txt-box" placeholder="Your name" autocomplete="off"/>
         <br/>
-        <input type="button" className="gg-btn gg-active-btn" onclick="c_sfx();" value="Start Game"/>
+        <input type="button"  id="cr-btn" className="gg-btn gg-active-btn" onClick={()=>Jx_Create_Room()} value="Start Game"/>
         <br/><br/>
-        <span>#Message section(?)</span>
+        <span id="_msg"></span>
 
         </center>
       </form>
@@ -26,5 +27,41 @@ export default function Create_Room() {
     </div>
       </div>
     );
+
+
+    function Jx_Create_Room() {
+      let _msg = document.getElementById('_msg');
+      let player_name = document.getElementById("player_name");
+      if(player_name.value.trim().length == 0){
+        _msg.innerText="Please enter name !";
+        _msg.style.color="tomato";
+        return false;
+
+      }
+      player_name.disabled=true;
+      $('#cr-btn').prop({'class':'gg-btn gg-in-active-btn'}).val("Creating room..");
+      let data = "module=add_player&action=create&name="+player_name.value;
+      const response = fetch("http://127.0.0.1/raja_rani/api/index.php", {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/x-www-form-urlencoded",
+        }),
+        body: data
+      })
+        .then(async (res) => {
+          data = await res.json();
+          if(data.flag){
+                window.open('/whoiam?roomid='+btoa(btoa(data.roomid)),'_self');
+          }else{
+            _msg.innerText=data.message;
+            _msg.style.color="tomato";
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
+
 
 }
