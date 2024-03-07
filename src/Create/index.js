@@ -41,7 +41,7 @@ export default function Create_Room() {
       player_name.disabled=true;
       $('#cr-btn').prop({'class':'gg-btn gg-in-active-btn'}).val("Creating room..");
       let data = "module=add_player&action=create&name="+player_name.value;
-      const response = fetch("http://127.0.0.1/raja_rani/api/index.php", {
+      const response = fetch("http://localhost/raja-rani/api/index.php", {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/x-www-form-urlencoded",
@@ -49,6 +49,8 @@ export default function Create_Room() {
         body: data
       })
         .then(async (res) => {
+          player_name.disabled=false;
+          $('#cr-btn').prop({'class':'gg-btn gg-active-btn'}).val("Start Game");
           data = await res.json();
           if(data.flag){
                 window.open('/whoiam?roomid='+btoa(btoa(data.roomid)),'_self');
