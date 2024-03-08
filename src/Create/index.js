@@ -53,7 +53,10 @@ export default function Create_Room() {
           $('#cr-btn').prop({'class':'gg-btn gg-active-btn'}).val("Start Game");
           data = await res.json();
           if(data.flag){
-                window.open('/whoiam?roomid='+btoa(btoa(data.roomid)),'_self');
+            localStorage.setItem("_rid",btoa(btoa(data.data)));
+            localStorage.setItem("plc",data.place);
+            localStorage.setItem("st",data.state);
+            window.open('/whoiam','_self');
           }else{
             _msg.innerText=data.message;
             _msg.style.color="tomato";

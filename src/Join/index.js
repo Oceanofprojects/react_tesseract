@@ -1,9 +1,34 @@
+import $ from 'jquery';
 import DryLeafLayer from '../DryLeafLayer';
 import {useNavigate} from 'react-router-dom';
 
 
 export default function Join_room() {
   let navigate = useNavigate();
+  function Join(){
+    let data = "module=add_player&action=join&name="+$('#name').val()+"&roomid="+$('#roomid').val();
+    const response = fetch("http://localhost/raja-rani/api/index.php", {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/x-www-form-urlencoded",
+      }),
+      body: data
+    })
+      .then(async (res) => {
+        data = await res.json();
+            if(!data.flag){
+              $('#msg').text(data.message);
+            }else{
+              localStorage.setItem("_rid",btoa(btoa(data.data)));
+              localStorage.setItem("plc",data.place);
+              localStorage.setItem("st",data.state);
+              window.open('/whoiam','_self');
+            }
+      }).catch((error) => {
+        console.error(error);
+      });
+
+  }
     return (
       <div className="center-content">
       <h1 className="g-title">Join <span style={{color:'darkred'}}>R</span>oom</h1>
@@ -11,12 +36,12 @@ export default function Join_room() {
       <DryLeafLayer/>
       <form>
           <center>
-          <input type="text" maxlength="10" className="gg-txt-box" placeholder="Your name" />
+          <input type="text" maxlength="10" className="gg-txt-box" id="name" placeholder="Your name" />
           <br />
-          <input type="text" maxlength="5" className="gg-txt-box" placeholder="Room-ID" />
-          <br /><br /><input type="button" className="gg-btn gg-active-btn" onclick="c_sfx();" value="Join Game" />
+          <input type="text" maxlength="5" className="gg-txt-box"  id="roomid" placeholder="Room-ID" />
+          <br /><br /><input type="button" className="gg-btn gg-active-btn" onClick={Join} value="Join Game" />
           <br /><br />
-          <span>#Message section(?)</span>
+          <span id="msg" style={{color:'tomato'}}></span>
           </center>
             </form>
       <div className='rightFloatBtns'>

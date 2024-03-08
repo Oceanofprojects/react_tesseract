@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {useState} from 'react';
+import {useState , useEffect} from 'react';
 import DryLeafLayer from '../DryLeafLayer.js';
 import minister from '../game-assets/gg-design/characters/minister.jpg';
 import king from '../game-assets/gg-design/characters/king.jpg';
@@ -9,13 +9,15 @@ import wizard from '../game-assets/gg-design/characters/wizard.jpg';
 import police from '../game-assets/gg-design/characters/police.jpg';
 import {useNavigate} from 'react-router-dom';
 
-
+var _this_roomid = null;
 export default function Whoiam(){
-  let [btnState,setBtnState] = useState(false);
+  let [btn_acs,set_btn_acs] = useState(false);
+  window.onbeforeunload=function(){
+    alert("END")
+  }
   let navigate = useNavigate();
-  // let btnState=false;
   function PlayersFetched_(){
-    let data = "module=eachfetch&roomid=D3928";
+    let data = "module=eachfetch&roomid="+_this_roomid;
     const response = fetch("http://localhost/raja-rani/api/index.php", {
       method: "POST",
       headers: new Headers({
@@ -27,13 +29,15 @@ export default function Whoiam(){
         data = await res.json();
           Object.entries(data).map((obj)=> {
             if(!obj[1].flag){
-              console.log(obj[1]);
               return;
             }
+            var pri = (data.characters.pri.result.length - data.players.waiting_players.data.length);
             if(data.players.waiting_players.data.length < data.characters.pri.result.length){
-              $('#player_fetch_cal').text("Waiting for "+(data.characters.pri.result.length - data.players.waiting_players.data.length)+" more players !..");
+              $('#player_fetch_cal').text("Waiting for "+pri+' to '+(pri+(data.characters.non_pri.result.length))+" more players !..");
+              set_btn_acs(false);
             }else{
-              $('#player_fetch_cal').text("Waiting for admin action !");
+              $('#player_fetch_cal').text("");
+              set_btn_acs(true)
             }
           });
       })
@@ -102,37 +106,29 @@ export default function Whoiam(){
                 }
     }//ANIMATION END
     function Get_Character(){
-    	$('#btn').prop({'disabled':true,'class':'gg-btn gg-in-active-btn'}).text('Getting in random..')
-    	//CODE AJAX HERE
-
-    	/**
-    	 *
-    	 * FIND PLAYER'S CHARACTER ID BASED ON PLAYER'S UNI-ID
-    	 *
-    	 * */
+    	 $('#btn').prop({'disabled':true,'class':'gg-btn gg-in-active-btn'}).text('Getting in random..')
        Choose_Character((Math.floor(Math.random()*5)+1));//DEFAULT RAND ID (FOR TESTING)...
     }
 
   function Room(){
-    var searchQuery = new URLSearchParams(window.location.search);
-    let params = new Map();
-    searchQuery.forEach((value,key)=>{
-      params.set(key,value);
-    });
-    let room_data = params;
-    if(room_data.has('roomid')){
-      setBtnState(true);
-      return  'ID : '+atob(atob(room_data.get('roomid')));
+    if(localStorage.getItem('_rid').length > 0){
+      _this_roomid = atob(atob(localStorage.getItem('_rid')));
+      return  'ID : '+_this_roomid;
     }else{
       return "INVALID ID !";
     }
 
   }//ROOM END
 
+useEffect(()=>{
+  const ind = setInterval(()=>{PlayersFetched_()},3000);
+  return ()=>clearInterval(ind);
+},[]);
+  ;
   return (
-
     <>
 <DryLeafLayer/>
+<br /><br/><br/>
 <h1 className="g-title">Make<span style={{color:'darkred'}}>up</span> Room</h1>
 <center>
 <br/>
@@ -142,7 +138,7 @@ export default function Whoiam(){
     <section className="c-profile-layer">
         <div className="c-profile char_1" style={{backgroundImage:`url(${minister})`,backgroundPosition:'center'}}>
                 <span>
-                    Minister
+                    Minister {_this_roomid}
                 </span>
             <div className="corner-frame"></div>
         </div>
@@ -180,11 +176,10 @@ export default function Whoiam(){
             <div className="corner-frame"></div>
         </div>
       </section>
-              <button className={`gg-btn ${btnState?"gg-active-btn":"gg-in-active-btn"}`} onClick={btnState?<Get_Character/>:()=>{alert("Invalid room ID")}} id="btn"  style={{margin:'40px 0px',padding:'20px'}}>Who i'm ?</button>
+              <button className={`gg-btn ${btn_acs?"gg-active-btn":"gg-in-active-btn"}`} onClick={btn_acs?Get_Character:()=>alert('Waiting players !')} id="btn"  style={{margin:'40px 0px',padding:'20px'}}>Who i'm ?</button>
               <div className='rightFloatBtns'>
               <button className="active-btn fa fa-chevron-left" onClick={()=>navigate(-1)}></button>
                 <button className="active-btn fa fa-share-alt"></button>
-                <button id="rid_bd" className="active-btn" onClick={PlayersFetched_}>Check JX</button>
             </div>
             <div className='FloatLabel leftFloatLabel'>
             <label><Room /></label>
