@@ -22,7 +22,7 @@ export default function Join_room() {
               localStorage.setItem("_rid",btoa(btoa(data.data)));
               localStorage.setItem("plc",data.place);
               localStorage.setItem("st",data.state);
-              window.open('/whoiam','_self');
+              // window.open('/Whoiam','_self');
             }
       }).catch((error) => {
         console.error(error);

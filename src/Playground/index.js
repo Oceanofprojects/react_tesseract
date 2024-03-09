@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import DryLeafLayer from '../DryLeafLayer.js';
+import {useEffect} from 'react';
 import minister from '../game-assets/gg-design/characters/minister.jpg';
 import king from '../game-assets/gg-design/characters/king.jpg';
 import queen from '../game-assets/gg-design/characters/queen.jpg';
@@ -10,6 +11,43 @@ import gift from '../game-assets/gg-design/gg-gold-icons/gift.jpg';
 
 
 export default function Playground(){
+
+  function Eachfetch_(){
+    var roomid = localStorage.getItem('_rid');
+    if(roomid==null){
+      return;
+    }
+    let data = "module=eachfetch&roomid="+atob(atob(roomid));
+    const response = fetch("http://localhost/raja-rani/api/index.php", {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/x-www-form-urlencoded",
+      }),
+      body: data
+    })
+      .then(async (res) => {
+        data = await res.json();
+          Object.entries(data).map((obj)=> {
+            if(!obj[1].flag){
+              return;
+            }
+            console.log(data);
+          });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      // alert()
+  }
+
+
+useEffect(()=>{
+const intr = setInterval(()=>{
+  Eachfetch_()
+},3000);
+return ()=>clearInterval(intr);
+},[]);
+
   return (
     <>
     <br/>

@@ -10,12 +10,14 @@ import police from '../game-assets/gg-design/characters/police.jpg';
 import {useNavigate} from 'react-router-dom';
 
 var _this_roomid = null;
+
 export default function Whoiam(){
   let [btn_acs,set_btn_acs] = useState(false);
   window.onbeforeunload=function(){
     alert("END")
   }
   let navigate = useNavigate();
+
   function PlayersFetched_(){
     let data = "module=eachfetch&roomid="+_this_roomid;
     const response = fetch("http://localhost/raja-rani/api/index.php", {
@@ -31,13 +33,29 @@ export default function Whoiam(){
             if(!obj[1].flag){
               return;
             }
-            var pri = (data.characters.pri.result.length - data.players.waiting_players.data.length);
-            if(data.players.waiting_players.data.length < data.characters.pri.result.length){
-              $('#player_fetch_cal').text("Waiting for "+pri+' to '+(pri+(data.characters.non_pri.result.length))+" more players !..");
-              set_btn_acs(false);
+            if(data.room.flag){
+              var pri = (data.characters.pri.result.length - data.players.waiting_players.data.length);
+              if(data.players.waiting_players.data.length < data.characters.pri.result.length){
+                $('#player_fetch_cal').text("Waiting for "+pri+' to '+(pri+(data.characters.non_pri.result.length))+" more players !..");
+                set_btn_acs(false);
+              }else{
+                if(localStorage.getItem('st')==null){
+                  $('#gameStartadminBtn').hide();
+                }else{
+                  if(localStorage.getItem('st')=='acs'){
+                    $('#player_fetch_cal').text("");
+                    if(btn_acs){
+                      $('#gameStartadminBtn').show();
+                    }
+                  }else{
+                    $('#player_fetch_cal').text("Waiting for admin action");
+                    $('#gameStartadminBtn').hide();
+                  }
+                }
+              }
             }else{
-              $('#player_fetch_cal').text("");
-              set_btn_acs(true)
+              $('#player_fetch_cal').text("Oops, Room Close / Expired !");
+              set_btn_acs(false);
             }
           });
       })
@@ -58,7 +76,30 @@ export default function Whoiam(){
   let _mychar;
   let roomid =11;
 
+function Assign_char(){
+  alert()
 
+  let data = "module=character_allocate&roomid="+_this_roomid;
+  const response = fetch("http://localhost/raja-rani/api/index.php", {
+    method: "POST",
+    headers: new Headers({
+      "Content-Type": "application/x-www-form-urlencoded",
+    }),
+    body: data
+  })
+    .then(async (res) => {
+      data = await res.json();
+      if(data.flag){
+        set_btn_acs(true);
+        $('#gameStartadminBtn').hide();
+      }else{
+        $('#player_fetch_cal').text(data.message).css('color','tomato');
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
     function Choose_Character(id = 0){
       if(id!==0){
@@ -106,18 +147,48 @@ export default function Whoiam(){
                 }
     }//ANIMATION END
     function Get_Character(){
-    	 $('#btn').prop({'disabled':true,'class':'gg-btn gg-in-active-btn'}).text('Getting in random..')
-       Choose_Character((Math.floor(Math.random()*5)+1));//DEFAULT RAND ID (FOR TESTING)...
+      $('#btn').prop({'disabled':true,'class':'gg-btn gg-in-active-btn'}).text('Getting in random..')
+
+      var plc = localStorage.getItem('plc');
+      if(plc==null){
+        return;
+      }
+      let data = "module=_get_my_char&roomid="+_this_roomid+"&plc="+plc;
+      const response = fetch("http://localhost/raja-rani/api/index.php", {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/x-www-form-urlencoded",
+        }),
+        body: data
+      })
+        .then(async (res) => {
+          data = await res.json();
+          if(data.flag){
+            if(data.data.length > 0){
+              localStorage.setItem('ch_plc',data.data[0].ch_plc);
+              Choose_Character(data.data[0].ch_plc);//Choosing real id character
+            }
+          }else{
+            $('#player_fetch_cal').text(data.message).css('color','tomato');
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
     }
 
   function Room(){
-    if(localStorage.getItem('_rid').length > 0){
-      _this_roomid = atob(atob(localStorage.getItem('_rid')));
-      return  'ID : '+_this_roomid;
-    }else{
+    if(localStorage.getItem('_rid') == null){
       return "INVALID ID !";
+    }else{
+      if(localStorage.getItem('_rid').length > 0){
+        _this_roomid = atob(atob(localStorage.getItem('_rid')));
+        return  'ID : '+_this_roomid;
+      }else{
+        return "INVALID ID !";
+      }
     }
-
   }//ROOM END
 
 useEffect(()=>{
@@ -136,47 +207,50 @@ useEffect(()=>{
 <br /><br/>
 
     <section className="c-profile-layer">
-        <div className="c-profile char_1" style={{backgroundImage:`url(${minister})`,backgroundPosition:'center'}}>
+        <div className="c-profile char_5" style={{backgroundImage:`url(${minister})`,backgroundPosition:'center'}}>
                 <span>
                     Minister {_this_roomid}
                 </span>
             <div className="corner-frame"></div>
         </div>
 
-        <div className="c-profile char_2" style={{backgroundImage:`url(${king})`,backgroundPosition:'center'}}>
+        <div className="c-profile char_1" style={{backgroundImage:`url(${king})`,backgroundPosition:'center'}}>
                 <span>
                     King
                 </span>
             <div className="corner-frame"></div>
         </div>
 
-        <div className="c-profile char_3" style={{backgroundImage:`url(${queen})`,backgroundPosition:'center'}}>
+        <div className="c-profile char_2" style={{backgroundImage:`url(${queen})`,backgroundPosition:'center'}}>
                 <span>
                     Queen
                 </span>
             <div className="corner-frame"></div>
         </div>
 
-        <div className="c-profile char_4" style={{backgroundImage:`url(${thief})`,backgroundPosition:'center'}}>
+        <div className="c-profile char_3" style={{backgroundImage:`url(${thief})`,backgroundPosition:'center'}}>
                 <span>
                     Thief
                 </span>
             <div className="corner-frame"></div>
         </div>
-        <div className="c-profile char_5" style={{backgroundImage:`url(${wizard})`,backgroundPosition:'center'}}>
+        <div className="c-profile char_6" style={{backgroundImage:`url(${wizard})`,backgroundPosition:'center'}}>
                 <span>
                     Wizard
                 </span>
             <div className="corner-frame"></div>
         </div>
-        <div className="c-profile char_6" style={{backgroundImage:`url(${police})`,backgroundPosition:'center'}}>
+        <div className="c-profile char_4" style={{backgroundImage:`url(${police})`,backgroundPosition:'center'}}>
                 <span>
                     Police
                 </span>
             <div className="corner-frame"></div>
         </div>
       </section>
-              <button className={`gg-btn ${btn_acs?"gg-active-btn":"gg-in-active-btn"}`} onClick={btn_acs?Get_Character:()=>alert('Waiting players !')} id="btn"  style={{margin:'40px 0px',padding:'20px'}}>Who i'm ?</button>
+              <button className={`gg-btn ${btn_acs?"gg-active-btn":"gg-in-active-btn"}`} onClick={btn_acs?Get_Character:()=>alert('Waiting players !')} id="btn"  style={{margin:'40px 0px',padding:'20px','display':`${btn_acs?"block":"none"}`}}>Who i'm ?</button>
+
+              <button className="gg-btn gg-active-btn" onClick={Assign_char} id="gameStartadminBtn"  style={{margin:'40px 0px',padding:'20px'}}>Ready !</button>
+
               <div className='rightFloatBtns'>
               <button className="active-btn fa fa-chevron-left" onClick={()=>navigate(-1)}></button>
                 <button className="active-btn fa fa-share-alt"></button>
