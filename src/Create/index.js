@@ -41,7 +41,7 @@ export default function Create_Room() {
       player_name.disabled=true;
       $('#cr-btn').prop({'class':'gg-btn gg-in-active-btn'}).val("Creating room..");
       let data = "module=add_player&action=create&name="+player_name.value;
-      const response = fetch("http://localhost/raja-rani/api/index.php", {
+      const response = fetch("https://raja_rani_api.vercel.app/?api=test", {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/x-www-form-urlencoded",
