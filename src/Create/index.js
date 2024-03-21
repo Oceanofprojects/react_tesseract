@@ -44,11 +44,10 @@ export default function Create_Room() {
       const response = fetch("https://raja_rani_api.vercel.app/", {
         method: "POST",
         headers: new Headers({
-          'Access-Control-Allow-Credentials':true,
-'Access-Control-Allow-Origin':'*',
-'Access-Control-Allow-Methods':'GET,OPTIONS,PATCH,DELETE,POST,PUT',
-'Access-Control-Allow-Headers':'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
-                    "Content-Type": "application/x-www-form-urlencoded"
+          'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST',
+    'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
         }),
         body: data
       })
