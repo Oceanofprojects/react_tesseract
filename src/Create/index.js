@@ -15,7 +15,7 @@ export default function Create_Room() {
       <center>
         <input type="text" maxlength="10" id="player_name" className="gg-txt-box" placeholder="Your name" autocomplete="off"/>
         <br/>
-        <input type="button"  id="cr-btn" className="gg-btn gg-active-btn" onClick={()=>Jx_Create_Room()} value="Start Game"/>
+        <input type="button"  id="cr-btn" className="gg-btn gg-active-btn" onClick={Jx_Create_Room} value="Start Game"/>
         <br/><br/>
         <span id="_msg"></span>
 
@@ -27,9 +27,10 @@ export default function Create_Room() {
     </div>
       </div>
     );
+  
+}
 
-
-    function Jx_Create_Room() {
+function Jx_Create_Room() {
       let _msg = document.getElementById('_msg');
       let player_name = document.getElementById("player_name");
       if(player_name.value.trim().length == 0){
@@ -41,17 +42,13 @@ export default function Create_Room() {
       player_name.disabled=true;
       $('#cr-btn').prop({'class':'gg-btn gg-in-active-btn'}).val("Creating room..");
       let data = "module=add_player&action=create&name="+player_name.value;
-      const response = fetch("https://raja_rani_api.vercel.app/", {
+      const response = fetch("https://raja-rani-api.vercel.app/", {
         method: "POST",
-        headers: new Headers({
-          'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST',
-    'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
-        }),
+        headers: new Headers(
+        {'Content-Type':'application/x-www-form-urlencoded'}
+        ),
         body: data
-      })
-        .then(async (res) => {
+      }).then(async (res) => {
           player_name.disabled=false;
           $('#cr-btn').prop({'class':'gg-btn gg-active-btn'}).val("Start Game");
           data = await res.json();
@@ -69,7 +66,3 @@ export default function Create_Room() {
           console.error(error);
         });
     }
-
-
-
-}

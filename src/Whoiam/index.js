@@ -20,7 +20,7 @@ export default function Whoiam(){
 
   function PlayersFetched_(){
     let data = "module=eachfetch&roomid="+_this_roomid;
-    const response = fetch("http://localhost/raja-rani/api/index.php", {
+    const response = fetch("https://raja-rani-api.vercel.app/", {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/x-www-form-urlencoded",

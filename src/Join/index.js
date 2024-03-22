@@ -5,30 +5,6 @@ import {useNavigate} from 'react-router-dom';
 
 export default function Join_room() {
   let navigate = useNavigate();
-  function Join(){
-    let data = "module=add_player&action=join&name="+$('#name').val()+"&roomid="+$('#roomid').val();
-    const response = fetch("http://localhost/raja-rani/api/index.php", {
-      method: "POST",
-      headers: new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-      }),
-      body: data
-    })
-      .then(async (res) => {
-        data = await res.json();
-            if(!data.flag){
-              $('#msg').text(data.message);
-            }else{
-              localStorage.setItem("_rid",btoa(btoa(data.data)));
-              localStorage.setItem("plc",data.place);
-              localStorage.setItem("st",data.state);
-              // window.open('/Whoiam','_self');
-            }
-      }).catch((error) => {
-        console.error(error);
-      });
-
-  }
     return (
       <div className="center-content">
       <h1 className="g-title">Join <span style={{color:'darkred'}}>R</span>oom</h1>
@@ -53,3 +29,26 @@ export default function Join_room() {
     );
 
 }
+function Join(){
+    let data = "module=add_player&action=join&name="+$('#name').val()+"&roomid="+$('#roomid').val();
+    const response = fetch("https://raja-rani-api.vercel.app/", {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/x-www-form-urlencoded",
+      }),
+      body: data
+    }).then(async (res) => {
+        data = await res.json();
+            if(!data.flag){
+              $('#msg').text(data.message);
+            }else{
+              localStorage.setItem("_rid",btoa(btoa(data.data)));
+              localStorage.setItem("plc",data.place);
+              localStorage.setItem("st",data.state);
+              // window.open('/Whoiam','_self');
+            }
+      }).catch((error) => {
+        console.error(error);
+      });
+
+  }
