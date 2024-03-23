@@ -45,7 +45,7 @@ function Join(){
               localStorage.setItem("_rid",btoa(btoa(data.data)));
               localStorage.setItem("plc",data.place);
               localStorage.setItem("st",data.state);
-              // window.open('/Whoiam','_self');
+               window.open('/Whoiam','_self');
             }
       }).catch((error) => {
         console.error(error);
