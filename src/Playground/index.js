@@ -8,7 +8,7 @@ import thief from '../game-assets/gg-design/characters/thief.jpg';
 import wizard from '../game-assets/gg-design/characters/wizard.jpg';
 import police from '../game-assets/gg-design/characters/police.jpg';
 import gift from '../game-assets/gg-design/gg-gold-icons/gift.jpg';
-
+import API_ENV from '../Api/RR_ENV.json';
 
 export default function Playground(){
 
@@ -18,7 +18,7 @@ export default function Playground(){
       return;
     }
     let data = "module=eachfetch&roomid="+atob(atob(roomid));
-    const response = fetch("http://localhost/raja-rani/api/index.php", {
+    const response = fetch(API_ENV.ENV.USE_ENV.URL, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/x-www-form-urlencoded",

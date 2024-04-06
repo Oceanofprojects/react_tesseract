@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {useState , useEffect} from 'react';
+import {useState,useRef, useEffect} from 'react';
 import DryLeafLayer from '../DryLeafLayer.js';
 import minister from '../game-assets/gg-design/characters/minister.jpg';
 import king from '../game-assets/gg-design/characters/king.jpg';
@@ -8,19 +8,28 @@ import thief from '../game-assets/gg-design/characters/thief.jpg';
 import wizard from '../game-assets/gg-design/characters/wizard.jpg';
 import police from '../game-assets/gg-design/characters/police.jpg';
 import {useNavigate} from 'react-router-dom';
+import API_ENV from '../Api/RR_ENV.json';
+
 
 var _this_roomid = null;
 
 export default function Whoiam(){
   let [btn_acs,set_btn_acs] = useState(false);
-  window.onbeforeunload=function(){
-    alert("END")
-  }
+   const [stop_effect,set_stop_effect] = useState(true);
+  // window.onbeforeunload=function(){
+  //   alert("END")
+  // }
   let navigate = useNavigate();
+  useEffect(()=>{
+  if(stop_effect){
+      const ind = setInterval(()=>{PlayersFetched_()},3000);
+      return ()=>clearTimeout(ind);
+   }
+  },[stop_effect]);
 
   function PlayersFetched_(){
     let data = "module=eachfetch&roomid="+_this_roomid;
-    const response = fetch("https://raja-rani-api.vercel.app/", {
+    const response = fetch(API_ENV.ENV.USE_ENV.URL, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
@@ -33,7 +42,8 @@ export default function Whoiam(){
             if(!obj[1].flag){
               return;
             }
-            if(data.room.flag){
+            // console.log(data)
+            if(data.room.room_valid.flag){
               var pri = (data.characters.pri.result.length - data.players.waiting_players.data.length);
               if(data.players.waiting_players.data.length < data.characters.pri.result.length){
                 $('#player_fetch_cal').text("Waiting for "+pri+' to '+(pri+(data.characters.non_pri.result.length))+" more players !..");
@@ -48,12 +58,19 @@ export default function Whoiam(){
                       $('#gameStartadminBtn').show();
                     }
                   }else{
-                    $('#player_fetch_cal').text("Waiting for admin action");
-                    $('#gameStartadminBtn').hide();
+                    if(data.room.room_state.data.status == 'open'){
+                      $('#gameStartadminBtn').hide();
+                      $('#player_fetch_cal').text("Select your character by click Whoaim ?");
+                      set_btn_acs(true);
+                    }else{
+                      $('#player_fetch_cal').text("Waiting for admin action");
+                    }
                   }
                 }
               }
             }else{
+set_stop_effect(false);
+// console.log('time to stop eachfetch');
               $('#player_fetch_cal').text("Oops, Room Close / Expired !");
               set_btn_acs(false);
             }
@@ -77,10 +94,8 @@ export default function Whoiam(){
   let roomid =11;
 
 function Assign_char(){
-  alert()
-
   let data = "module=character_allocate&roomid="+_this_roomid;
-  const response = fetch("http://localhost/raja-rani/api/index.php", {
+  const response = fetch(API_ENV.ENV.USE_ENV.URL, {
     method: "POST",
     headers: new Headers({
       "Content-Type": "application/x-www-form-urlencoded",
@@ -91,6 +106,7 @@ function Assign_char(){
       data = await res.json();
       if(data.flag){
         set_btn_acs(true);
+        alert(data.message)
         $('#gameStartadminBtn').hide();
       }else{
         $('#player_fetch_cal').text(data.message).css('color','tomato');
@@ -101,7 +117,8 @@ function Assign_char(){
     });
 }
 
-    function Choose_Character(id = 0){
+    function Choose_Character(id = 0)
+    {
       if(id!==0){
         _mychar = id;
       }
@@ -135,6 +152,8 @@ function Assign_char(){
                 	flag = false;
                 	if(innerloop === timeOfloop){
                 		//AFTER LOOP ANIMATION
+                    // $('#player_fetch_cal').text("Your char ID "+_mychar);
+
                 		$('.char_'+_mychar).css({
                 			'box-shadow':'0px 0px 5px 5px rgba(256,256,256,.5),0px 0px 10px 10px rgba(256,256,256,.2)'
                     	});
@@ -148,13 +167,13 @@ function Assign_char(){
     }//ANIMATION END
     function Get_Character(){
       $('#btn').prop({'disabled':true,'class':'gg-btn gg-in-active-btn'}).text('Getting in random..')
-
+//
       var plc = localStorage.getItem('plc');
       if(plc==null){
         return;
       }
       let data = "module=_get_my_char&roomid="+_this_roomid+"&plc="+plc;
-      const response = fetch("http://localhost/raja-rani/api/index.php", {
+      const response = fetch(API_ENV.ENV.USE_ENV.URL, {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/x-www-form-urlencoded",
@@ -191,11 +210,9 @@ function Assign_char(){
     }
   }//ROOM END
 
-useEffect(()=>{
-  const ind = setInterval(()=>{PlayersFetched_()},3000);
-  return ()=>clearInterval(ind);
-},[]);
-  ;
+
+
+
   return (
     <>
 <DryLeafLayer/>

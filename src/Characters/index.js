@@ -1,4 +1,5 @@
 import './Characters_Layer.css';
+import API_ENV from '../Api/RR_ENV.json';
 import DryLeafLayer from '../DryLeafLayer.js';
 import minister from '../game-assets/gg-design/characters/minister.jpg';
 import king from '../game-assets/gg-design/characters/king.jpg';

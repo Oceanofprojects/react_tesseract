@@ -1,0 +1,12 @@
+{
+	"ENV":{
+		"USE_ENV_L":{
+			"MODE":"TEST",
+			"URL":"http://localhost/raja-rani/api/index.php"
+					},
+		"USE_ENV":{
+			"MODE":"LIVE",
+			"URL":"https://raja-rani-api.vercel.app/api"
+		}
+	}
+}

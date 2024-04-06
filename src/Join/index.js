@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import DryLeafLayer from '../DryLeafLayer';
 import {useNavigate} from 'react-router-dom';
-
+import API_ENV from '../Api/RR_ENV.json';
 
 export default function Join_room() {
   let navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function Join_room() {
 }
 function Join(){
     let data = "module=add_player&action=join&name="+$('#name').val()+"&roomid="+$('#roomid').val();
-    const response = fetch("https://raja-rani-api.vercel.app/", {
+    const response = fetch(API_ENV.ENV.USE_ENV.URL, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
@@ -45,7 +45,7 @@ function Join(){
               localStorage.setItem("_rid",btoa(btoa(data.data)));
               localStorage.setItem("plc",data.place);
               localStorage.setItem("st",data.state);
-              // window.open('/Whoiam','_self');
+              window.open('/Whoiam','_self');
             }
       }).catch((error) => {
         console.error(error);

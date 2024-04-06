@@ -1,9 +1,8 @@
 import $ from 'jquery';
+import API_ENV from '../Api/RR_ENV.json';
 import DryLeafLayer from '../DryLeafLayer';
 import {useNavigate} from 'react-router-dom';
 import './Create_room.css';
-
-
 export default function Create_Room() {
   let navigate = useNavigate();
     return (
@@ -27,7 +26,7 @@ export default function Create_Room() {
     </div>
       </div>
     );
-  
+
 }
 
 function Jx_Create_Room() {
@@ -42,7 +41,7 @@ function Jx_Create_Room() {
       player_name.disabled=true;
       $('#cr-btn').prop({'class':'gg-btn gg-in-active-btn'}).val("Creating room..");
       let data = "module=add_player&action=create&name="+player_name.value;
-      const response = fetch("https://raja-rani-api.vercel.app/", {
+      const response = fetch(API_ENV.ENV.USE_ENV.URL, {
         method: "POST",
         headers: new Headers(
         {'Content-Type':'application/x-www-form-urlencoded'}
@@ -52,6 +51,7 @@ function Jx_Create_Room() {
           player_name.disabled=false;
           $('#cr-btn').prop({'class':'gg-btn gg-active-btn'}).val("Start Game");
           data = await res.json();
+          console.log(data)
           if(data.flag){
             localStorage.setItem("_rid",btoa(btoa(data.data)));
             localStorage.setItem("plc",data.place);
