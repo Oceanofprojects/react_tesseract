@@ -2,6 +2,10 @@ import './Home.css';
 import DryLeafLayer from '../DryLeafLayer.js';
 
 export default function Home() {
+  localStorage.setItem("_rid",null);
+              localStorage.setItem("plc",null);
+              localStorage.setItem("st",null);
+              localStorage.setItem('ch_plc',null);
   return (
     <div className="center-content">
     <h1 className="g-title">Raja&nbsp;<b style={{color:'red'}}>&hearts;</b>&nbsp;Rani</h1>

@@ -9,6 +9,7 @@ import wizard from '../game-assets/gg-design/characters/wizard.jpg';
 import police from '../game-assets/gg-design/characters/police.jpg';
 import {useNavigate} from 'react-router-dom';
 import API_ENV from '../Api/RR_ENV.json';
+import './whoiam.css';
 
 
 var _this_roomid = null;
@@ -42,35 +43,40 @@ export default function Whoiam(){
             if(!obj[1].flag){
               return;
             }
-            // console.log(data)
             if(data.room.room_valid.flag){
               var pri = (data.characters.pri.result.length - data.players.waiting_players.data.length);
               if(data.players.waiting_players.data.length < data.characters.pri.result.length){
                 $('#player_fetch_cal').text("Waiting for "+pri+' to '+(pri+(data.characters.non_pri.result.length))+" more players !..");
-                set_btn_acs(false);
+                // set_btn_acs(false);
               }else{
-                if(localStorage.getItem('st')==null){
+                if(localStorage.getItem('st')==null || localStorage.getItem('st')=='null'){
                   $('#gameStartadminBtn').hide();
                 }else{
                   if(localStorage.getItem('st')=='acs'){
                     $('#player_fetch_cal').text("");
                     if(btn_acs){
+                      $('#gameStartadminBtn').hide();
+                    }else{
                       $('#gameStartadminBtn').show();
                     }
                   }else{
-                    if(data.room.room_state.data.status == 'open'){
                       $('#gameStartadminBtn').hide();
+                    if(data.room.room_state.data.status == 'open'){
                       $('#player_fetch_cal').text("Select your character by click Whoaim ?");
                       set_btn_acs(true);
                     }else{
+                      set_btn_acs(false);  
                       $('#player_fetch_cal').text("Waiting for admin action");
                     }
                   }
                 }
               }
             }else{
-set_stop_effect(false);
-// console.log('time to stop eachfetch');
+              set_stop_effect(false);//Stop fetch
+              localStorage.setItem("_rid",null);
+              localStorage.setItem("plc",null);
+              localStorage.setItem("st",null);
+              localStorage.setItem('ch_plc',null);
               $('#player_fetch_cal').text("Oops, Room Close / Expired !");
               set_btn_acs(false);
             }
@@ -198,15 +204,11 @@ function Assign_char(){
     }
 
   function Room(){
-    if(localStorage.getItem('_rid') == null){
+    if(localStorage.getItem('_rid') == null || localStorage.getItem('_rid') == 'null'){
       return "INVALID ID !";
     }else{
-      if(localStorage.getItem('_rid').length > 0){
         _this_roomid = atob(atob(localStorage.getItem('_rid')));
         return  'ID : '+_this_roomid;
-      }else{
-        return "INVALID ID !";
-      }
     }
   }//ROOM END
 
