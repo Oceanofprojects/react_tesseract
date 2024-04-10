@@ -1,10 +1,10 @@
 {
 	"ENV":{
-		"USE_ENV":{
+		"USE_ENV_o":{
 			"MODE":"TEST",
 			"URL":"http://localhost/raja-rani/api/index.php"
 					},
-		"USE_ENV_l":{
+		"USE_ENV":{
 			"MODE":"LIVE",
 			"URL":"https://raja-rani-api.vercel.app/api"
 		}
