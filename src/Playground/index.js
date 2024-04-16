@@ -11,7 +11,6 @@ import gift from '../game-assets/gg-design/gg-gold-icons/gift.jpg';
 import API_ENV from '../Api/RR_ENV.json';
 
 export default function Playground(){
-
   function Eachfetch_(){
     var roomid = localStorage.getItem('_rid');
     if(roomid==null){
@@ -27,12 +26,18 @@ export default function Playground(){
     })
       .then(async (res) => {
         data = await res.json();
-          Object.entries(data).map((obj)=> {
-            if(!obj[1].flag){
-              return;
+const players = data.players;
+            let dis_wait_players = '( ';
+            for(let i=0;i<players.waiting_players.data.length;i++){
+                dis_wait_players +='/'+players.waiting_players.data[i].players;
             }
-            console.log(data);
-          });
+            dis_wait_players += ' )';
+
+            if(players.all_players.data.length == players.online_players.data.length){
+              console.log("READY TO PLAY");
+            }else{
+                $('#player_fetch_cal').text('Waiting for '+dis_wait_players);
+            }
       })
       .catch((error) => {
         console.error(error);
@@ -55,7 +60,13 @@ return ()=>clearInterval(intr);
 <DryLeafLayer/>
 <h1 style={{color:'#fff',textAlign:'center'}}>Ground</h1>
 <br/><br/>
-<br/><center>
+<br/>
+<center>
+
+<span id="player_fetch_cal" style={{color:"#fff"}}>asas</span>
+<br/>
+<br/>
+
 <section className="c-profile-layer">
 <center >
         <div className="char_1" style={{position:'relative',bottom:'0',left:'0',backgroundImage:`url(${police})`,backgroundPosition:'center',height:'250px',width:'200px',color:'#fff'}}>

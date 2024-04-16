@@ -15,11 +15,9 @@ import './whoiam.css';
 var _this_roomid = null;
 
 export default function Whoiam(){
-  let [btn_acs,set_btn_acs] = useState(false);
-   const [stop_effect,set_stop_effect] = useState(true);
-  // window.onbeforeunload=function(){
-  //   alert("END")
-  // }
+  const [btn_acs,set_btn_acs] = useState(false);
+  const [stop_effect,set_stop_effect] = useState(true);
+  
   let navigate = useNavigate();
   useEffect(()=>{
   if(stop_effect){
@@ -45,6 +43,7 @@ export default function Whoiam(){
             }
             if(data.room.room_valid.flag){
               var pri = (data.characters.pri.result.length - data.players.waiting_players.data.length);
+              let btn_acs_stt = null;
               if(data.players.waiting_players.data.length < data.characters.pri.result.length){
                 $('#player_fetch_cal').text("Waiting for "+pri+' to '+(pri+(data.characters.non_pri.result.length))+" more players !..");
                 // set_btn_acs(false);
@@ -53,12 +52,12 @@ export default function Whoiam(){
                   $('#gameStartadminBtn').hide();
                 }else{
                   if(localStorage.getItem('st')=='acs'){
-                    $('#player_fetch_cal').text("");
-                    if(btn_acs){
-                      $('#gameStartadminBtn').hide();
-                    }else{
-                      $('#gameStartadminBtn').show();
-                    }
+                   $('#player_fetch_cal').text("");
+                   if(btn_acs){
+                     $('#gameStartadminBtn').hide();  
+                      }else{
+                      $('#gameStartadminBtn').show();  
+                   }
                   }else{
                       $('#gameStartadminBtn').hide();
                     if(data.room.room_state.data.status == 'open'){
@@ -113,7 +112,6 @@ function Assign_char(){
       if(data.flag){
         set_btn_acs(true);
         alert(data.message)
-        $('#gameStartadminBtn').hide();
       }else{
         $('#player_fetch_cal').text(data.message).css('color','tomato');
       }
@@ -163,8 +161,28 @@ function Assign_char(){
                 		$('.char_'+_mychar).css({
                 			'box-shadow':'0px 0px 5px 5px rgba(256,256,256,.5),0px 0px 10px 10px rgba(256,256,256,.2)'
                     	});
-    					$('#btn').prop({'disabled':false,'class':'gg-btn gg-active-btn'}).text('Next Step').attr('onclick','window.open("/Playground","_self")');
-                	}else{
+    					$('#btn').prop({'disabled':false,'class':'gg-btn gg-active-btn'}).text('Next Step').on('click',function(){
+          let data = "module=change_player_mode&roomid="+_this_roomid+"&st=act&plc="+localStorage.getItem('plc');
+          // console.log(data)
+            const response = fetch(API_ENV.ENV.USE_ENV.URL, {
+              method: "POST",
+              headers: new Headers({
+                "Content-Type": "application/x-www-form-urlencoded",
+              }),
+              body: data
+            })
+              .then(async (res) => {
+                data = await res.json();
+                if(data.flag){
+                  window.open("/Playground","_self");
+                }else{
+                  $('#player_fetch_cal').text(data.message).css('color','tomato');
+                }
+              })
+              .catch((error) => {
+                console.error(error);
+              })
+              });	}else{
                 		speed+=100;
     	            	Choose_Character();
     	            	innerloop++;

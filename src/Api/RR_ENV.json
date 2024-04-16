@@ -1,6 +1,6 @@
 {
 	"ENV":{
-		"USE_ENV_o":{
+		"USE_ENV_n":{
 			"MODE":"TEST",
 			"URL":"http://localhost/raja-rani/api/index.php"
 					},
