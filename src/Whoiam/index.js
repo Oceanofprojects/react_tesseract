@@ -13,6 +13,7 @@ import './whoiam.css';
 
 
 var _this_roomid = null;
+var _mybtnstate=false;
 
 export default function Whoiam(){
   const [btn_acs,set_btn_acs] = useState(false);
@@ -53,7 +54,7 @@ export default function Whoiam(){
                 }else{
                   if(localStorage.getItem('st')=='acs'){
                    $('#player_fetch_cal').text("");
-                   if(btn_acs){
+                   if(_mybtnstate){
                      $('#gameStartadminBtn').hide();  
                       }else{
                       $('#gameStartadminBtn').show();  
@@ -110,7 +111,8 @@ function Assign_char(){
     .then(async (res) => {
       data = await res.json();
       if(data.flag){
-        set_btn_acs(true);
+        _mybtnstate = true;
+        set_btn_acs(_mybtnstate);
         alert(data.message)
       }else{
         $('#player_fetch_cal').text(data.message).css('color','tomato');
@@ -230,12 +232,35 @@ function Assign_char(){
     }
   }//ROOM END
 
+  function clsShareUI(){
+    $('.share_room_layout').css("display","none");
+  }
+
+function opShareUI(){
+    $('.share_room_layout').css("display","flex");
+  }
+
+  function copy2clip(){
+    $("#room_url").select();
+    document.execCommand("copy");
+  }
+
+function Share_room_layout(){
+  return (<section className="share_room_layout">
+    <input type="text" value="TEST URL" id="room_url"/>
+   <button onClick={clsShareUI} style={{"border":"none","position":"absolute","top":"0px","left":"0px","padding":"7px"}} className="fa fa-close btn active-btn">&nbsp;&nbsp;Close</button>
+    <div className="room_share">
+   <button className="fa fa-share-alt gg-btn gg-active-btn" onClick={copy2clip}>&nbsp;&nbsp;Invite Friends</button>
+   </div>
+    </section>);
+}
 
 
 
   return (
     <>
 <DryLeafLayer/>
+<Share_room_layout/>
 <br /><br/><br/>
 <h1 className="g-title">Make<span style={{color:'darkred'}}>up</span> Room</h1>
 <center>
@@ -246,7 +271,7 @@ function Assign_char(){
     <section className="c-profile-layer">
         <div className="c-profile char_5" style={{backgroundImage:`url(${minister})`,backgroundPosition:'center'}}>
                 <span>
-                    Minister {_this_roomid}
+                    Minister
                 </span>
             <div className="corner-frame"></div>
         </div>
@@ -290,7 +315,7 @@ function Assign_char(){
 
               <div className='rightFloatBtns'>
               <button className="active-btn fa fa-chevron-left" onClick={()=>navigate(-1)}></button>
-                <button className="active-btn fa fa-share-alt"></button>
+                <button className="active-btn fa fa-share-alt" onClick={opShareUI}></button>
             </div>
             <div className='FloatLabel leftFloatLabel'>
             <label><Room /></label>

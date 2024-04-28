@@ -3,3 +3,30 @@
 #gameStartadminBtn{
 	display: none;
 }
+
+.share_room_layout{
+	position:fixed;
+	top:0px;
+	left:0px;
+	background:rgba(0, 0, 0, .7);
+	height: 100vh;
+	width:100%;
+	z-index:50;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	backdrop-filter:blur(2px);
+	display: none;
+}
+.room_share{
+	position: relative;
+	top:0px;
+	left:0px;
+}
+.share_room_layout input[type="text"]{
+	position:absolute;
+	top:0px;left:0px;
+/*	opacity: 0;*/
+	width:5px;
+	height:5px;
+}
