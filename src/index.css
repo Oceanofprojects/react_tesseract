@@ -21,6 +21,8 @@
             background-position:center;
             background-size: cover;
             background-attachment: fixed;
+scrollbar-width:thin;
+
     }
 .c-profile-layer{
         max-width:1200px;

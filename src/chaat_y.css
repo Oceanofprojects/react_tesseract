@@ -1,0 +1,76 @@
+._ct_{
+	position: fixed;
+	top:0px;
+	left:0px;
+			display: flex;
+			justify-content: center;
+			align-items:flex-start;
+			background:rgba(0,0,0,.3);
+			height:100vh;
+			width:100vw;
+			backdrop-filter:blur(10px);
+			z-index:50;
+			display: none;
+		}
+		._inner_ct_ui_layer{
+			width:40%;
+			min-width:200px;
+		}
+
+		.main_ct{
+			height:350px;
+			width:95%;
+background:url('E:/react_tesseract/src/game-assets/gg-design/gg-gold-icons/wood.png');
+background-size:100%;
+
+			display: flex;
+			justify-content: space-between;
+			flex-direction: column;
+ scrollbar-width:none;
+		}
+		._ct_ui_footer{
+			height:10%;
+		}
+		._ct_ui_cnt{
+			height:90%;
+						overflow-x: hidden;
+			overflow-y: scroll;
+ scrollbar-width:none;
+
+		}
+		._ct_ui_footer input[type='text']{
+			border: none;
+			width:80%;
+			background:transparent;
+			padding:10px;
+			box-shadow:0px 0px 10px 2px #000 inset;
+			color:#fff;
+			font-weight: bolder;
+			border-radius: 5px;
+		}
+/*		input[type='button']{
+			border: none;
+			background:goldenrod;
+			width:150px;
+			padding:10px 5px;
+		}*/
+		.ct_bx{
+			background: rgba(0, 0, 0, .4);
+			width:80%;
+			text-align: left;
+			margin:10px;
+			border-radius: 10px;
+
+		}
+		._ct_ui_cnt span{
+			padding: 0px 10px;
+			background: #000;
+			color:goldenrod;
+		}
+		._ct_ui_cnt p{
+			color:#ddd;
+			padding:10px;
+			border:2px solid goldenrod;
+			border-radius: 10px;
+
+		}

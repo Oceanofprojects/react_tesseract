@@ -1,4 +1,7 @@
+*{
+scrollbar-width:none;
 
+}
 
 #gameStartadminBtn{
 	display: none;
@@ -30,3 +33,5 @@
 	width:5px;
 	height:5px;
 }
+
+

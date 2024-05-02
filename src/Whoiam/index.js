@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import {useState,useRef, useEffect} from 'react';
 import DryLeafLayer from '../DryLeafLayer.js';
+import {OpCt,ClsCt,Chaat_y} from '../Chaat_y.js';
 import minister from '../game-assets/gg-design/characters/minister.jpg';
 import king from '../game-assets/gg-design/characters/king.jpg';
 import queen from '../game-assets/gg-design/characters/queen.jpg';
@@ -10,6 +11,8 @@ import police from '../game-assets/gg-design/characters/police.jpg';
 import {useNavigate} from 'react-router-dom';
 import API_ENV from '../Api/RR_ENV.json';
 import './whoiam.css';
+import '../chaat_y.css';
+
 
 
 var _this_roomid = null;
@@ -260,7 +263,9 @@ function Share_room_layout(){
   return (
     <>
 <DryLeafLayer/>
+
 <Share_room_layout/>
+<Chaat_y/>
 <br /><br/><br/>
 <h1 className="g-title">Make<span style={{color:'darkred'}}>up</span> Room</h1>
 <center>
@@ -315,6 +320,7 @@ function Share_room_layout(){
 
               <div className='rightFloatBtns'>
               <button className="active-btn fa fa-chevron-left" onClick={()=>navigate(-1)}></button>
+              <button className="active-btn fa fa-comment-o" onClick={OpCt}></button>
                 <button className="active-btn fa fa-share-alt" onClick={opShareUI}></button>
             </div>
             <div className='FloatLabel leftFloatLabel'>
