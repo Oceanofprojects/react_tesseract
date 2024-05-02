@@ -20,9 +20,6 @@
 		.main_ct{
 			height:350px;
 			width:95%;
-background:url('E:/react_tesseract/src/game-assets/gg-design/gg-gold-icons/wood.png');
-background-size:100%;
-
 			display: flex;
 			justify-content: space-between;
 			flex-direction: column;

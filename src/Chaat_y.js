@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import top_ct_ from './game-assets/gg-design/gg-gold-icons/top.png';
 import bottom_ct_ from './game-assets/gg-design/gg-gold-icons/bottom.png';
+import wood from './game-assets/gg-design/gg-gold-icons/wood.png';
 
 
 function OpCt(){
@@ -18,17 +19,17 @@ function ClsCt(){
 
 function Chaat_y(){
    return(
-<section className="_ct_" onClick={ClsCt}>
+<section className="_ct_">
     <div className="_inner_ct_ui_layer">
   <div style={{'display': 'flex','justify-content': 'center','align-items': 'center','background':`url(${top_ct_})`,'backgroundSize':'100% 100%','width':'100%','height':'60px'}}>
-    <span>
-        RajaRani
+    <span onClick={ClsCt}><br/>
+        <h1>Raja - Rani</h1>
       
     </span>
   </div>
 
 
-<center>  <div className="main_ct">
+<center>  <div className="main_ct" style={{'background':`url(${wood})`,'backgroundSize':'100%'}}>
 
 
       <div className="_ct_ui_cnt">
