@@ -7,7 +7,7 @@ export default function Join_room() {
   let navigate = useNavigate();
     return (
       <div className="center-content">
-      <h1 className="g-title">Join <span style={{color:'darkred'}}>R</span>oom</h1>
+      <h1 className="g-title">Join Room</h1>
       <br/>
       <DryLeafLayer/>
       <form>
@@ -22,7 +22,6 @@ export default function Join_room() {
             </form>
       <div className='rightFloatBtns'>
           <button className="active-btn fa fa-chevron-left" onClick={()=>navigate(-1)}></button>
-          <button className="active-btn fa fa-question" onClick={()=>window.open('/Whoiam','_self')}></button>
           <button className="active-btn" onClick={()=>window.open('/CreateRoom','_self')}>Create room</button>
     </div>
       </div>

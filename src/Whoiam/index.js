@@ -227,10 +227,12 @@ function Assign_char(){
     }
 
   function Room(){
-    if(localStorage.getItem('_rid') == null || localStorage.getItem('_rid') == 'null'){
+    if(localStorage.getItem('_rid') == null || localStorage.getItem('_rid') == 'null'){      
       return "INVALID ID !";
     }else{
         _this_roomid = atob(atob(localStorage.getItem('_rid')));
+        $('.btssc').show();
+
         return  'ID : '+_this_roomid;
     }
   }//ROOM END
@@ -267,7 +269,7 @@ function Share_room_layout(){
 <Share_room_layout/>
 <Chaat_y/>
 <br /><br/><br/>
-<h1 className="g-title">Make<span style={{color:'darkred'}}>up</span> Room</h1>
+<h1 className="g-title">Makeup Room</h1>
 <center>
 <br/>
 <span id="player_fetch_cal" style={{color:"#fff"}}></span>
@@ -320,8 +322,8 @@ function Share_room_layout(){
 
               <div className='rightFloatBtns'>
               <button className="active-btn fa fa-chevron-left" onClick={()=>navigate(-1)}></button>
-              <button className="active-btn fa fa-comment-o" onClick={OpCt}></button>
-                <button className="active-btn fa fa-share-alt" onClick={opShareUI}></button>
+              <button className="active-btn fa fa-comment-o btssc" onClick={OpCt}></button>
+                <button className="active-btn fa fa-share-alt btssc" onClick={opShareUI}></button>
             </div>
             <div className='FloatLabel leftFloatLabel'>
             <label><Room /></label>

@@ -2,7 +2,12 @@
 scrollbar-width:none;
 
 }
-
+/*body{
+	        background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('../game-assets/gg-design/bg2.jpg');
+            background-position:center;
+            background-size: cover;
+            background-attachment: fixed;
+}*/
 #gameStartadminBtn{
 	display: none;
 }

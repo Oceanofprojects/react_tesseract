@@ -7,7 +7,7 @@ export default function Create_Room() {
   let navigate = useNavigate();
     return (
       <div class="center-content">
-      <h1 class="g-title">Create <span style={{color:'darkred'}}>R</span>oom</h1>
+      <h1 class="g-title">Create Room</h1>
       <br/>
       <DryLeafLayer/>
       <form>

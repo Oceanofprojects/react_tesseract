@@ -3,22 +3,34 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins:wght@200&family=Share+Tech+Mono&display=swap');
 
+ @font-face{
+        font-family: g-title-f;
+/*        src:url('./game-assets/fonts/Kingthings_Gothique.ttf');*/
+        src:url('./game-assets/fonts/Hug.ttf');
+
+    }
+     @font-face{
+        font-family:Mouldy;
+/*        src:url('./game-assets/fonts/Kingthings_Gothique.ttf');*/
+        src:url('./game-assets/fonts/LongToday.ttf');
+
+    }
 
 * {
         margin: 0px;
         padding: 0px;
         outline: none;
         user-select:none;
-/*        font-family:sans-serif;*/
+        letter-spacing:1px;
+        font-family:Mouldy;
     }
 
 
     body {
         height:100vh;
         width:100%;
-        background:#123a;
         background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('game-assets/gg-design/bg1.jpg');
-            background-position:center;
+/*            background-position:center;*/
             background-size: cover;
             background-attachment: fixed;
 scrollbar-width:thin;
@@ -84,7 +96,6 @@ scrollbar-width:thin;
         border-radius: 5px;
         font-weight: bolder;
         text-shadow:.6px .6px 0px #ddda,-.6px -.6px 0px #555a;
-
     }
     .active-btn:hover {
         cursor: pointer;
@@ -123,8 +134,10 @@ scrollbar-width:thin;
       padding:15px 20px;
       font-weight:bolder;
       margin:15px 0px;
+
     }
     .gg-active-btn{
+
       cursor: pointer;
     }
     .gg-in-active-btn{
@@ -135,11 +148,7 @@ scrollbar-width:thin;
     .gg-active-btn:hover{
       color:darkred;
     }
-    @font-face{
-        font-family: g-title-f;
-        src:url('./game-assets/fonts/Kingthings_Gothique.ttf');
-
-    }
+   
 
     .rightFloatBtns{
         position:fixed;
@@ -174,6 +183,67 @@ scrollbar-width:thin;
         font-size: 4em;
         padding:30px 0px;
     }
+
+    .gg-cls-btn{
+        color:red;
+        padding:8px 10px;
+        background:#f8e773;
+        border-radius:50px;
+        transition: .3s;
+        cursor: pointer;
+        text-shadow:0px 1px 1px rgba(0,0,0,.5);
+        border:2px solid goldenrod;
+    }
+    .gg-cls-btn:hover{
+        transform: rotate(90deg);
+    }
+
+    .gg-cls-btn:after{
+        content: '';
+        position: absolute;
+        top:0px;
+        left:0px;
+        height:100%;
+        width:100%;
+        border-radius:50px;
+        background:linear-gradient(250deg,transparent,transparent,transparent,transparent,transparent,rgba(255,250,250,.5),transparent,transparent,transparent,transparent,transparent,transparent,transparent,transparent);
+        animation:coinshine 5s linear infinite;
+
+    }
+    .btssc{
+        display: none;
+    }
+/*.profilepic{
+    position: absolute;
+    left:150px;
+    height:100px;
+    width: 100px;
+    background:red;
+    background-size:100% 100%;
+    border-radius: 50px;
+    border:3 solid #ddd;
+}
+.profilepic:before{
+position:absolute;
+content:'';
+height:100px;
+width:100px;
+background:linear-gradient(250deg,transparent,transparent,transparent,transparent,transparent,rgba(255,250,250,.5),transparent,transparent,transparent,transparent,transparent,transparent,transparent,transparent);
+border-radius: 50px;
+animation:coinshine 5s linear infinite;
+}*/
+@keyframes coinshine{
+0%{
+    background-position: 0px;
+}
+50%{
+        background-position: 50px;
+}
+100%{
+        background-position: 100px;
+}
+
+}
     @media only screen and (max-width:650px){
     .g-title{
         font-size: 5em;

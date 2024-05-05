@@ -7,15 +7,19 @@ import queen from '../game-assets/gg-design/characters/queen.jpg';
 import thief from '../game-assets/gg-design/characters/thief.jpg';
 import wizard from '../game-assets/gg-design/characters/wizard.jpg';
 import police from '../game-assets/gg-design/characters/police.jpg';
+import {useNavigate} from 'react-router-dom';
+
 
 
 export default function Characters(){
+  let navigate = useNavigate();
+    
   return (
     <>
     <br/>
     <br/>
 <DryLeafLayer/>
-<h1 class="g-title">Cha<span style={{color:'darkred'}}>r</span>acters</h1>
+<h1 class="g-title">Characters</h1>
 <br/><center>
     <section className="c-profile-layer">
         <div className="c-profile char_1" style={{backgroundImage:`url(${minister})`,backgroundPosition:'center'}}>
@@ -58,6 +62,10 @@ export default function Characters(){
             <div className="corner-frame"></div>
         </div>
       </section>
+      <div className='rightFloatBtns'>
+              <button className="active-btn fa fa-chevron-left" onClick={()=>navigate(-1)}></button>
+              <button className="active-btn fa fa-comment-o btssc"></button>
+            </div>
   </center>
     </>
   );
