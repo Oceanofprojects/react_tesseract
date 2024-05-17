@@ -1,6 +1,6 @@
 import './Home.css';
 import DryLeafLayer from '../DryLeafLayer.js';
-import audio from '../lib/audio.js';
+import Aud_brd_ from '../Aud_brd.js';
 
 
 export default function Home() {
@@ -10,12 +10,12 @@ export default function Home() {
               localStorage.setItem('ch_plc',null);
   return (
     <div className="center-content">
-    <audio/>
-    <h1 className="g-title">Raja&nbsp;<b style={{color:'red'}}>&hearts;</b>&nbsp;Rani</h1>
+    <Aud_brd_/>
+      <h1 className="g-title">Raja&nbsp;<b style={{color:'red'}}>&hearts;</b>&nbsp;Rani</h1>
     <DryLeafLayer/>
         <h6 style={{textAlign:'center',padding:'20px 0px',color:'#fff'}}>New multiplayer. V.0.11</h6>
         <center>
-        <button className="gg-btn gg-active-btn" onClick={()=>window.open('/CreateRoom','_self')}>Create room</button>
+        <button className="gg-btn gg-active-btn" onClick={()=>{window.open('/CreateRoom','_self')}}>Create room</button>
         &nbsp;&nbsp;&nbsp;
         <button className="gg-btn gg-active-btn" onClick={()=>window.open('/JoinRoom','_self')}>Join room</button>
         </center>
