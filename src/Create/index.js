@@ -2,27 +2,32 @@ import $ from 'jquery';
 import API_ENV from '../Api/RR_ENV.json';
 import DryLeafLayer from '../DryLeafLayer';
 import {useNavigate} from 'react-router-dom';
+import Aud_brd_ from '../game-assets/audio/Aud.js';
+import Pre_init from '../Pre.js';
+
+
 import './Create_room.css';
 export default function Create_Room() {
   let navigate = useNavigate();
     return (
-      <div class="center-content">
-      <h1 class="g-title">Create Room</h1>
+      <div className="center-content">
+      <h1 className="g-title">Create Room</h1>
       <br/>
+    <Aud_brd_/>
       <DryLeafLayer/>
       <form>
       <center>
-        <input type="text" maxlength="10" id="player_name" className="gg-txt-box" placeholder="Your name" autocomplete="off"/>
+        <input type="text" maxLength="10" id="player_name" className="gg-txt-box" placeholder="Your name" autoComplete="off"/>
         <br/>
-        <input type="button"  id="cr-btn" className="gg-btn gg-active-btn" onClick={Jx_Create_Room} value="Start Game"/>
+        <input type="button"  id="cr-btn" className="gg-btn gg-active-btn" onClick={()=>{Pre_init();Jx_Create_Room();}} value="Start Game"/>
         <br/><br/>
         <span id="_msg"></span>
 
         </center>
       </form>
       <div className='rightFloatBtns'>
-        <button className="active-btn fa fa-chevron-left" onClick={()=>navigate(-1)}></button>
-                <button className="active-btn" onClick={()=>window.open('/JoinRoom','_self')}>Join room</button>
+        <button className="active-btn fa fa-chevron-left" onClick={()=>{Pre_init();navigate(-1)}}></button>
+                <button className="active-btn" onClick={()=>{Pre_init({'action':{'open_nxt':'/JoinRoom'}})}}>Join room</button>
     </div>
       </div>
     );

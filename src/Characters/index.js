@@ -8,6 +8,8 @@ import thief from '../game-assets/gg-design/characters/thief.jpg';
 import wizard from '../game-assets/gg-design/characters/wizard.jpg';
 import police from '../game-assets/gg-design/characters/police.jpg';
 import {useNavigate} from 'react-router-dom';
+import Aud_brd_ from '../game-assets/audio/Aud.js';
+import Pre_init from '../Pre.js';
 
 
 
@@ -19,6 +21,7 @@ export default function Characters(){
     <br/>
     <br/>
 <DryLeafLayer/>
+<Aud_brd_/>
 <h1 class="g-title">Characters</h1>
 <br/><center>
     <section className="c-profile-layer">
@@ -63,7 +66,7 @@ export default function Characters(){
         </div>
       </section>
       <div className='rightFloatBtns'>
-              <button className="active-btn fa fa-chevron-left" onClick={()=>navigate(-1)}></button>
+              <button className="active-btn fa fa-chevron-left" onClick={()=>{Pre_init();navigate(-1)}}></button>
               <button className="active-btn fa fa-comment-o btssc"></button>
             </div>
   </center>

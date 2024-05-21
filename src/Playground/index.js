@@ -9,6 +9,8 @@ import wizard from '../game-assets/gg-design/characters/wizard.jpg';
 import police from '../game-assets/gg-design/characters/police.jpg';
 import gift from '../game-assets/gg-design/gg-gold-icons/gift.jpg';
 import API_ENV from '../Api/RR_ENV.json';
+import Aud_brd_ from '../game-assets/audio/Aud.js';
+import Pre_init from '../Pre.js';
 
 export default function Playground(){
 const [police_name,set_police_name] = useState('TBD');
@@ -26,7 +28,7 @@ const [stop_effect,set_stop_effect] = useState(true);
 
   function Eachfetch_(){
     var roomid = localStorage.getItem('_rid');
-    if(roomid==null){
+    if(roomid==null || roomid == 'null'){
       return;
     }
     let data = "module=eachfetch&roomid="+atob(atob(roomid));
@@ -39,6 +41,7 @@ const [stop_effect,set_stop_effect] = useState(true);
     })
       .then(async (res) => {
         data = await res.json();
+        console.log(data)
 const players = data.players;
 if((localStorage.getItem('st')==null && localStorage.getItem('ch_plc')==null && localStorage.getItem('plc')==null)){
     alert('Something wrong contact admin');
@@ -100,6 +103,7 @@ function upUI(data){
     <>
     <br/>
     <br/>
+    <Aud_brd_/>
 <DryLeafLayer/>
 <h1 style={{color:'#fff',textAlign:'center'}}>Ground</h1>
 <br/><br/>
@@ -131,7 +135,7 @@ function upUI(data){
      </section>
   </center>
   <div className='rightFloatBtns'>
-    <button className="active-btn fa fa-home" style={{position:'absolute',top:'10px',right:'10px'}} onClick={()=>window.open('/Home','_self')}>Home</button>
+    <button className="active-btn fa fa-home" style={{position:'absolute',top:'10px',right:'10px'}} onClick={()=>{Pre_init({'action':{'open_nxt':'/Home'}})}}>Home</button>
 </div>
     </>
   );

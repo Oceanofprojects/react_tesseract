@@ -1,6 +1,7 @@
 import './Home.css';
 import DryLeafLayer from '../DryLeafLayer.js';
-import Aud_brd_ from '../Aud_brd.js';
+import Aud_brd_ from '../game-assets/audio/Aud.js';
+import Pre_init from '../Pre.js';
 
 
 export default function Home() {
@@ -15,12 +16,12 @@ export default function Home() {
     <DryLeafLayer/>
         <h6 style={{textAlign:'center',padding:'20px 0px',color:'#fff'}}>New multiplayer. V.0.11</h6>
         <center>
-        <button className="gg-btn gg-active-btn" onClick={()=>{window.open('/CreateRoom','_self')}}>Create room</button>
+        <button className="gg-btn gg-active-btn" onClick={()=>{Pre_init({'action':{'open_nxt':'/CreateRoom'}})}}>Create room</button>
         &nbsp;&nbsp;&nbsp;
-        <button className="gg-btn gg-active-btn" onClick={()=>window.open('/JoinRoom','_self')}>Join room</button>
+        <button className="gg-btn gg-active-btn" onClick={()=>{Pre_init({'action':{'open_nxt':'/JoinRoom'}})}}>Join room</button>
         </center>
         <div className='rightFloatBtns'>
-          <button className="active-btn fa fa-user" onClick={()=>window.open('/Characters','_self')}></button>
+          <button className="active-btn fa fa-user" onClick={()=>{Pre_init({'action':{'open_nxt':'/Characters'}})}}></button>
       </div>
     </div>
   );

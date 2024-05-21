@@ -10,6 +10,8 @@ import wizard from '../game-assets/gg-design/characters/wizard.jpg';
 import police from '../game-assets/gg-design/characters/police.jpg';
 import {useNavigate} from 'react-router-dom';
 import API_ENV from '../Api/RR_ENV.json';
+import Aud_brd_ from '../game-assets/audio/Aud.js';
+import Pre_init from '../Pre.js';
 import './whoiam.css';
 import '../chaat_y.css';
 
@@ -166,7 +168,9 @@ function Assign_char(){
                 		$('.char_'+_mychar).css({
                 			'box-shadow':'0px 0px 5px 5px rgba(256,256,256,.5),0px 0px 10px 10px rgba(256,256,256,.2)'
                     	});
+                    $('#btn').remove('onclick');
     					$('#btn').prop({'disabled':false,'class':'gg-btn gg-active-btn'}).text('Next Step').on('click',function(){
+                Pre_init();
           let data = "module=change_player_mode&roomid="+_this_roomid+"&st=act&plc="+localStorage.getItem('plc');
           // console.log(data)
             const response = fetch(API_ENV.ENV.USE_ENV.URL, {
@@ -179,7 +183,11 @@ function Assign_char(){
               .then(async (res) => {
                 data = await res.json();
                 if(data.flag){
-                  window.open("/Playground","_self");
+                  Pre_init({
+                    'action':{
+                      'open_nxt':'/Playground'
+                    }
+                    });
                 }else{
                   $('#player_fetch_cal').text(data.message).css('color','tomato');
                 }
@@ -268,6 +276,7 @@ function Share_room_layout(){
 
 <Share_room_layout/>
 <Chaat_y/>
+<Aud_brd_/>
 <br /><br/><br/>
 <h1 className="g-title">Makeup Room</h1>
 <center>
@@ -316,14 +325,14 @@ function Share_room_layout(){
             <div className="corner-frame"></div>
         </div>
       </section>
-              <button className={`gg-btn ${btn_acs?"gg-active-btn":"gg-in-active-btn"}`} onClick={btn_acs?Get_Character:()=>alert('Waiting players !')} id="btn"  style={{margin:'40px 0px',padding:'20px','display':`${btn_acs?"block":"none"}`}}>Who i'm ?</button>
+              <button className={`gg-btn ${btn_acs?"gg-active-btn":"gg-in-active-btn"}`} onClick={btn_acs?()=>{Pre_init();Get_Character()}:()=>alert('Waiting players !')} id="btn"  style={{margin:'40px 0px',padding:'20px','display':`${btn_acs?"block":"none"}`}}>Who i'm ?</button>
 
-              <button className="gg-btn gg-active-btn" onClick={Assign_char} id="gameStartadminBtn"  style={{margin:'40px 0px',padding:'20px'}}>Ready !</button>
+              <button className="gg-btn gg-active-btn" onClick={()=>{Pre_init();Assign_char()}} id="gameStartadminBtn"  style={{margin:'40px 0px',padding:'20px'}}>Ready !</button>
 
               <div className='rightFloatBtns'>
-              <button className="active-btn fa fa-chevron-left" onClick={()=>navigate(-1)}></button>
-              <button className="active-btn fa fa-comment-o btssc" onClick={OpCt}></button>
-                <button className="active-btn fa fa-share-alt btssc" onClick={opShareUI}></button>
+              <button className="active-btn fa fa-chevron-left" onClick={()=>{Pre_init();navigate(-1)}}></button>
+              <button className="active-btn fa fa-comment-o btssc" onClick={()=>{Pre_init();OpCt()}}></button>
+                <button className="active-btn fa fa-share-alt btssc" onClick={()=>{Pre_init();opShareUI()}}></button>
             </div>
             <div className='FloatLabel leftFloatLabel'>
             <label><Room /></label>
